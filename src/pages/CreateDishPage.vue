@@ -1,0 +1,129 @@
+<template>
+  <MainLayout>
+    <BaseTitle>Создать блюдо</BaseTitle>
+    <BaseForm>
+      <BaseInput
+          type="text"
+          placeholder="Название"
+          v-model:value="title"
+      />
+      <BaseInput
+          type="text"
+          placeholder="Описание"
+          v-model:value="description"
+      />
+      <BaseInput
+          type="number"
+          placeholder="Стоимость"
+          v-model:value="price"
+      />
+      <BaseInput
+          type="number"
+          placeholder="Калории"
+          v-model:value="calories"
+      />
+      <BaseInput
+          type="number"
+          placeholder="Белки"
+          v-model:value="proteins"
+      />
+      <BaseInput
+          type="number"
+          placeholder="Жиры"
+          v-model:value="fats"
+      />
+      <BaseInput
+          type="number"
+          placeholder="Углеводы"
+          v-model:value="carbohydrates"
+      />
+      <div class="photo">
+        <label for="photo">Фото</label>
+        <BaseInput
+            type="file"
+            id="photo"
+            @change="getPhoto"
+        />
+      </div>
+      <BaseButton @click="uploadPhoto" class="btn">Создать</BaseButton>
+
+    </BaseForm>
+  </MainLayout>
+</template>
+
+<script>
+
+import {defineComponent} from "vue";
+import MainLayout from "@/layouts/MainLayout.vue";
+import BaseInput from "@/components/BaseInput.vue";
+import BaseButton from "@/components/BaseButton.vue";
+import BaseForm from "@/components/BaseForm.vue";
+
+import {getFormData} from "@/helpers/files";
+import PhotoService from "@/services/PhotoService";
+import DishesService from "@/services/DishesService";
+
+
+export default defineComponent({
+  components: {BaseForm, BaseButton, BaseInput, MainLayout},
+  data: () => ({
+    title: '',
+    description: '',
+    price: null,
+    calories: null,
+    proteins: null,
+    fats: null,
+    carbohydrates: null,
+    categoryId: null,
+    photoId: null,
+    photoFormData: null
+  }),
+  methods: {
+    getPhoto(event) {
+      this.photoFormData = getFormData(event)
+      console.log(this.photoFormData)
+    },
+    async uploadPhoto() {
+      if (this.photoFormData) {
+        await PhotoService.uploadPhoto(this.photoFormData)
+            .then(async (res) => {
+              this.photoId = res.data.file_id
+              await this.createDish()
+            })
+      }
+    },
+    async createDish() {
+      const data = {
+        title: this.title,
+        description: this.description,
+        category_id: this.$route.params.id,
+        photo_id: this.photoId,
+        price: this.price,
+        calories: this.calories,
+        proteins: this.proteins,
+        fats: this.fats,
+        carbohydrates: this.carbohydrates
+      }
+      await DishesService.createDish(data)
+          .then(() => {
+            alert('Блюдо успешно создано!')
+            this.$router.push({name: 'dishes'})
+          })
+          .catch(e => alert('Что-то пошло не так(: \n' + e))
+    }
+  }
+})
+</script>
+
+<style lang="scss" scoped>
+.photo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.btn {
+  width: 100%;
+}
+</style>

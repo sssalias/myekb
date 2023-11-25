@@ -1,0 +1,4 @@
+@import "fontMixin";
+@mixin link {
+  @include font(18, 14)
+}

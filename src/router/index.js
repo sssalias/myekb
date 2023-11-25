@@ -1,19 +1,45 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const routes = [
+  // {
+  //   path: '/',
+  //   name: 'main',
+  //   component: () => import('@/pages/MainPage.vue')
+  // },
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'orgs',
+    component: () => import('@/pages/OrgsPage.vue')
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/orgs/:id',
+    name: 'orgsById',
+    component: () => import('@/pages/OrgInfoPage.vue'),
+  },
+  {
+    path: '/orgs/dishes/:id',
+    name: 'dishes',
+    component: () => import('@/pages/DishesPage.vue')
+  },
+  {
+    path: '/create/org',
+    name: 'createOrg',
+    component: () => import('@/pages/CreateOrgPage.vue')
+  },
+  {
+    path: '/create/:id/category',
+    name: 'createCategory',
+    component: () => import('@/pages/CreateCategoryPage.vue')
+  },
+  {
+    path: '/create/:id/dish',
+    name: 'createDish',
+    component: () => import('@/pages/CreateDishPage.vue')
+  },
+  {
+    path: '/edit/dish/:id',
+    name: 'editDish',
+    component: () => import('@/pages/EditDishPage.vue')
   }
 ]
 
