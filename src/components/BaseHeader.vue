@@ -36,6 +36,7 @@ header {
   height: 100px;
   position: fixed;
   top: 0;
+  left: 0;
   background: white;
   z-index: 100000;
   .container {

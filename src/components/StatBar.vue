@@ -11,17 +11,13 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 export default {
   name: 'BarChart',
   components: { Bar },
+  props: ['labels', 'datasets', 'bckg'],
   data() {
     return {
       chartData: {
-        labels: [ 'January', 'February', 'March', 'asf'],
-        datasets: [
-          {
-            label: 'Data One',
-            backgroundColor: '#f87979',
-            data: [40, 20, 12, 8]
-          }
-        ]
+        labels: this.labels,
+        datasets: this.datasets,
+        backgroundColor: this.bckg
       }
     }
   }

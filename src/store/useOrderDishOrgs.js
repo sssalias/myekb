@@ -11,6 +11,7 @@ export default defineStore(
             addOrders(items) {
                 this.items = items
             }
-        }
+        },
+        persist: true
     }
 )

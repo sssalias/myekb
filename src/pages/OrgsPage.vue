@@ -20,10 +20,6 @@ export default {
     store: UseOrgStore(),
     headers: [
       {
-        text: 'ID',
-        value: 'id'
-      },
-      {
         text: 'Фото',
         value: 'photo'
       },

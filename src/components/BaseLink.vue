@@ -1,5 +1,5 @@
 <template>
-  <router-link class="link" :class="{active: active}" :to="link">
+  <router-link class="link"  :to="link">
     <span>
       <slot/>
     </span>

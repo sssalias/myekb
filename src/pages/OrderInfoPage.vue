@@ -1,7 +1,7 @@
 <template>
   <MainLayout>
-    <BaseTitle>Заказ {{ this.$route.params.id }}</BaseTitle>
-    <DataList :headers="headers" :items="store.items"/>
+    <BaseTitle>Заказ</BaseTitle>
+    <DataList :headers="headers" :items="store.items[0]"/>
   </MainLayout>
 </template>
 
@@ -21,6 +21,7 @@ export default {
   data: () => ({
     store: useOrderDishOrgs() ,
     headers: [
+      {text: '№', value: 'count'},
       {text: 'Фото', value: 'photo'},
       {text: 'Название', value: 'title'},
       {text: 'Описание', value: 'description'},
@@ -28,16 +29,10 @@ export default {
       {text: 'Калории', value: 'calories'},
       {text: 'Белки', value: 'proteins'},
       {text: 'Жиры', value: 'fats'},
-      {text: 'Углеводы', value: 'carbohydrates'},
-      {text: 'Время года', value: 'year'},
-      {text: 'Время дня', value: 'day'},
-      {text: 'Колчичество заказов', value: 'count'},
-      {text: 'Погода', value: 'weather'},
-      {text: '', value: 'del'}
     ],
   }),
   mounted() {
-    console.log(this.store)
+    console.log(this.store.items)
   }
 }
 </script>

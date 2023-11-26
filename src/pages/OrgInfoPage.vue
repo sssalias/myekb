@@ -56,7 +56,13 @@ export default {
     await this.getOrders()
         .then(res => {
           this.itemsOrders = res.data
+          let dishes = []
+          let id = 0
           for (let item of this.itemsOrders) {
+            item.id = id++
+            dishes.push(item.dishes)
+            // dishes[this.itemsOrders.indexOf(item)] = item.dishes
+
             if (item.delivery) {
               item.delivery = 'Доставить'
             } else {
@@ -73,9 +79,8 @@ export default {
               }
             }
           }
-          console.log(res.data.id)
-          this.store.addOrders(this.itemsOrders)
-          console.log(this.store.items)
+          this.store.addOrders(dishes)
+          console.log(dishes)
         })
         .catch(err => console.log(err))
     this.getId()
