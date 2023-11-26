@@ -40,6 +40,26 @@ const routes = [
     path: '/edit/dish/:id',
     name: 'editDish',
     component: () => import('@/pages/EditDishPage.vue')
+  },
+  {
+    path: '/order',
+    name: 'order',
+    component: () => import('@/pages/OrderInfoPage.vue')
+  },
+  {
+    path: '/stats',
+    name: 'stats',
+    component: () => import('@/pages/StatsPage.vue')
+  },
+  {
+    path: '/news',
+    name: 'news',
+    component: () => import('@/pages/NewsPage.vue')
+  },
+  {
+    path: '/create/news',
+    name: 'createNews',
+    component: () => import('@/pages/CreateNews.vue')
   }
 ]
 

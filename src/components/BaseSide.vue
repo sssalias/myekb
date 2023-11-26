@@ -2,6 +2,8 @@
   <div class="side">
     <div class="wrapper">
       <base-link :link="{name: 'orgs'}">Организации</base-link>
+      <base-link :link="{name: 'stats'}" :active="true">Статистика</base-link>
+      <base-link :link="{name: 'news'}">Новости</base-link>
     </div>
   </div>
 </template>
@@ -32,7 +34,9 @@ import BaseLink from "@/components/BaseLink.vue";
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
+    gap: 1rem;
     @include link;
+
   }
 }
 </style>

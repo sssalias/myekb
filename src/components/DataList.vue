@@ -1,12 +1,14 @@
 <template>
   <div class="list">
     <DataTable
+        class="table"
         :headers="headers"
         :items="items"
-        border-cell
         :sort-by="sortBy"
         :sort-type="sortType"
         @click-row="show"
+        table-class-name="customize-table"
+        alternating
         >
 
       <template #item-photo="{photo_id}">
@@ -19,7 +21,7 @@
         <router-link :to="{name: 'editDish', params: {id: id}}">
           <button><font-awesome-icon :icon="['fas', 'pen-to-square']"/></button>
         </router-link>
-        <button @click="del(id)"><font-awesome-icon :icon="['fas', 'trash']" /></button>
+        <button @click="del(id)"><font-awesome-icon :icon="['fas', 'trash']"/></button>
       </template>
     </DataTable>
   </div>
@@ -36,11 +38,15 @@ export default {
     sortType: 'asc',
     sortBy: 'title'
   }),
-  props: ['headers', 'items', 'pushName', 'url'],
+  props: ['headers', 'items', 'pushName', 'url', 'idless'],
   methods: {
     show(item) {
       if (this.pushName) {
-        this.$router.push({name: this.pushName, params: {id: item.id}})
+        if (!this.idless) {
+          this.$router.push({name: this.pushName, params: {id: item.id}})
+        } else {
+          this.$router.push({name: this.pushName})
+        }
       }
     },
     async del(id) {
@@ -59,6 +65,15 @@ export default {
     grid-template-columns: 1fr;
     gap: 2rem;
     z-index: 0;
+    .table {
+      padding: 1rem;
+      //border: 1px solid #D3AE78;
+      border: none;
+    }
+    .table {
+      width: 100%;
+
+    }
     .img__wrapper {
       height: 50px;
       width: 50px;
